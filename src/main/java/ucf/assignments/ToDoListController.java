@@ -22,6 +22,7 @@ public class ToDoListController
 	private TextField editTasks;
 
 	ObservableList<String> bufferString = FXCollections.observableArrayList();
+	private int index = -1;
 
 	@FXML
 	public void addToDoClick(ActionEvent actionEvent)
@@ -44,14 +45,19 @@ public class ToDoListController
 	@FXML
 	public void toDoListSelectClick(MouseEvent mouseEvent)
 	{
-		System.out.println(toDosList.getSelectionModel().getSelectedIndex());
+		// Update the index value of thec current index of the listview
+		index = toDosList.getSelectionModel().getSelectedIndex();
 	}
 
 	@FXML
 	public void removeTodoClick(ActionEvent actionEvent)
 	{
-		// this will remove a todolist (another class will probably be made to handle this and the list to
-		// properly handling deleting the both of them
+		// remove the selected toDolist
+		if (index != -1)
+		{
+			toDosList.getItems().remove(index);
+		}
+
 	}
 
 
