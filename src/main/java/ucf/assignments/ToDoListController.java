@@ -4,22 +4,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ListView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 
 public class ToDoListController
 {
-
+	@FXML
+	public TextArea listDesc;
+	public DatePicker inputDate;
 	@FXML
 	private ListView<String> toDosList;
 	@FXML
 	private TextField toDoListName;
-	@FXML
-	private ListView tasksList;
-	@FXML
-	private TextField editTasks;
 
 	ObservableList<String> bufferString = FXCollections.observableArrayList();
 	private int index = -1;
@@ -32,9 +28,11 @@ public class ToDoListController
 
 		// Check if the string in toDoListName is empty or not. If empty, skip it.
 		// Otherwise add content of toDoListName to the buffer and appply that to toDoList
-		if (!(toDoListName.getText().trim().isEmpty()))
+		if (!(toDoListName.getText().trim().isEmpty()) &&
+				inputDate.getConverter().fromString(inputDate.getEditor().getText()) != null)
 		{
-			bufferString.add(toDoListName.getText());
+			bufferString.add(toDoListName.getText()+" "
+					+String.valueOf(inputDate.getConverter().fromString(inputDate.getEditor().getText())));
 
 			// Clears the textfield with an empty string.
 			toDoListName.setText("");
@@ -45,7 +43,7 @@ public class ToDoListController
 	@FXML
 	public void toDoListSelectClick(MouseEvent mouseEvent)
 	{
-		// Update the index value of thec current index of the listview
+		// Update the index value of the current index of the listview
 		index = toDosList.getSelectionModel().getSelectedIndex();
 	}
 
@@ -60,6 +58,20 @@ public class ToDoListController
 
 	}
 
+	@FXML
+	public void addClick(ActionEvent actionEvent)
+	{
+		if (listDesc.getText().length() <= 256)
+		{
+
+		}
+
+		else
+		{
+
+		}
+	}
+
 
 	@FXML
 	public void exportAllClick(ActionEvent actionEvent)
@@ -67,19 +79,7 @@ public class ToDoListController
 		// This will export ALL todoLists into a txt file or a csv. (not sure which one to do just yet)
 	}
 
-	@FXML
-	public void exportListClick(ActionEvent actionEvent)
-	{
-		// this will export a singular list
-	}
 
-
-	@FXML
-	public void addOrEditClick(ActionEvent actionEvent)
-	{
-		// edits, adds or removes a list (still very bareboned, will most likely be seperated into different
-		// buttons to handle it more smoothly
-	}
 
 	@FXML
 	public void viewClick(ActionEvent actionEvent)
@@ -87,6 +87,4 @@ public class ToDoListController
 		// changes between lists (this might become obselete if I figure out how to change to different lists just by
 		// clicking the individual todos
 	}
-
-
 }
