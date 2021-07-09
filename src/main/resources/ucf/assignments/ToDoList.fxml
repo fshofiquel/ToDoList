@@ -7,20 +7,27 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane dividerPositions="0.5" orientation="VERTICAL" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.ToDoListController">
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="688.0">
-        <Button layoutX="8.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToDoClick" prefHeight="25.0" prefWidth="76.0" text="Add ToDo" />
-        <TextField fx:id="toDoListName" layoutX="96.0" layoutY="10.0" prefHeight="25.0" prefWidth="318.0" promptText="Write the title of your todo list here" />
-        <Button layoutX="607.0" layoutY="10.0" mnemonicParsing="false" onAction="#exportAllClick" text="Export All" />
+<SplitPane dividerPositions="0.5" orientation="VERTICAL" xmlns="http://javafx.com/javafx/16"
+           xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.ToDoListController">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0"
+                prefWidth="688.0">
+        <Button layoutX="8.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToDoClick" prefHeight="25.0"
+                prefWidth="76.0" text="Add ToDo"/>
+        <TextField fx:id="toDoListName" layoutX="96.0" layoutY="10.0" prefHeight="25.0" prefWidth="318.0"
+                   promptText="Write the title of your todo list here"/>
+        <Button layoutX="607.0" layoutY="10.0" mnemonicParsing="false" onAction="#exportAllClick" text="Export All"/>
     </AnchorPane>
     <AnchorPane prefHeight="400.0" prefWidth="689.0">
-        <ListView fx:id="toDosList" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="360.0" prefWidth="227.0" />
-        <ListView fx:id="tasksList" layoutX="288.0" layoutY="40.0" prefHeight="360.0" prefWidth="399.0" />
-        <TextField fx:id="editTasks" layoutX="356.0" layoutY="8.0" prefHeight="25.0" prefWidth="188.0" promptText="Write or edit your tasks here" />
-        <Button layoutX="289.0" layoutY="8.0" mnemonicParsing="false" onAction="#addOrEditClick" text="Add/Edit" />
-        <Separator layoutX="274.0" orientation="VERTICAL" prefHeight="41.0" prefWidth="13.0" translateX="8.0" />
-      <Button layoutX="227.0" layoutY="188.0" mnemonicParsing="false" onAction="#viewClick" text="View" translateX="10.0" />
-      <Button layoutX="604.0" layoutY="8.0" mnemonicParsing="false" onAction="#exportListClick" text="Export List" />
-      <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#removeTodoClick" text="Remove" />
+        <ListView fx:id="toDosList" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+                  minWidth="-Infinity" onMouseClicked="#toDoListSelectClick" prefHeight="360.0" prefWidth="227.0"/>
+        <ListView fx:id="tasksList" layoutX="288.0" layoutY="40.0" prefHeight="360.0" prefWidth="399.0"/>
+        <TextField fx:id="editTasks" layoutX="356.0" layoutY="8.0" prefHeight="25.0" prefWidth="188.0"
+                   promptText="Write or edit your tasks here"/>
+        <Button layoutX="289.0" layoutY="8.0" mnemonicParsing="false" onAction="#addOrEditClick" text="Add/Edit"/>
+        <Separator layoutX="274.0" orientation="VERTICAL" prefHeight="41.0" prefWidth="13.0" translateX="8.0"/>
+        <Button layoutX="227.0" layoutY="188.0" mnemonicParsing="false" onAction="#viewClick" text="View"
+                translateX="10.0"/>
+        <Button layoutX="604.0" layoutY="8.0" mnemonicParsing="false" onAction="#exportListClick" text="Export List"/>
+        <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#removeTodoClick" text="Remove"/>
     </AnchorPane>
 </SplitPane>

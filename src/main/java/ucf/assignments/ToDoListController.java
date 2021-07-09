@@ -5,7 +5,9 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class ToDoListController
 {
@@ -31,15 +33,25 @@ public class ToDoListController
 		// Otherwise add content of toDoListName to the buffer and appply that to toDoList
 		if (!(toDoListName.getText().trim().isEmpty()))
 		{
-			System.out.println("working!");
 			bufferString.add(toDoListName.getText());
 
 			// Clears the textfield with an empty string.
 			toDoListName.setText("");
-
-
 			toDosList.setItems(bufferString);
 		}
+	}
+
+	@FXML
+	public void toDoListSelectClick(MouseEvent mouseEvent)
+	{
+		System.out.println(toDosList.getSelectionModel().getSelectedIndex());
+	}
+
+	@FXML
+	public void removeTodoClick(ActionEvent actionEvent)
+	{
+		// this will remove a todolist (another class will probably be made to handle this and the list to
+		// properly handling deleting the both of them
 	}
 
 
@@ -55,12 +67,6 @@ public class ToDoListController
 		// this will export a singular list
 	}
 
-	@FXML
-	public void removeTodoClick(ActionEvent actionEvent)
-	{
-		// this will remove a todolist (another class will probably be made to handle this and the list to
-		// properly handling deleting the both of them
-	}
 
 	@FXML
 	public void addOrEditClick(ActionEvent actionEvent)
@@ -75,4 +81,6 @@ public class ToDoListController
 		// changes between lists (this might become obselete if I figure out how to change to different lists just by
 		// clicking the individual todos
 	}
+
+
 }
