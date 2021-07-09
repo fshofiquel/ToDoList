@@ -1,8 +1,9 @@
 package ucf.assignments;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 
@@ -10,7 +11,7 @@ public class ToDoListController
 {
 
 	@FXML
-	private ListView toDosList;
+	private ListView<String> toDosList;
 	@FXML
 	private TextField toDoListName;
 	@FXML
@@ -18,12 +19,29 @@ public class ToDoListController
 	@FXML
 	private TextField editTasks;
 
+	ObservableList<String> bufferString = FXCollections.observableArrayList();
+
 	@FXML
 	public void addToDoClick(ActionEvent actionEvent)
 	{
 		// This will obtain the text found in the textfield from toDoListName and tranfer it to toDoList
 		// The list will be updated to match that change
+
+		// Check if the string in toDoListName is empty or not. If empty, skip it.
+		// Otherwise add content of toDoListName to the buffer and appply that to toDoList
+		if (!(toDoListName.getText().trim().isEmpty()))
+		{
+			System.out.println("working!");
+			bufferString.add(toDoListName.getText());
+
+			// Clears the textfield with an empty string.
+			toDoListName.setText("");
+
+
+			toDosList.setItems(bufferString);
+		}
 	}
+
 
 	@FXML
 	public void exportAllClick(ActionEvent actionEvent)
