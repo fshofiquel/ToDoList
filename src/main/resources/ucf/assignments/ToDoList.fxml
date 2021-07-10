@@ -2,20 +2,26 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="452.0" prefWidth="794.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.ToDoListController">
     <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="792.0">
         <Button layoutX="8.0" layoutY="10.0" mnemonicParsing="false" onAction="#addToDoClick" prefHeight="25.0" prefWidth="76.0" text="Add Item" />
-        <TextField fx:id="toDoListName" layoutX="96.0" layoutY="10.0" prefHeight="25.0" prefWidth="318.0" promptText="Write the title of your item here" />
+        <TextField fx:id="toDoListName" layoutX="95.0" layoutY="10.0" prefHeight="26.0" prefWidth="178.0" promptText="Write the title of your task here" />
         <Button layoutX="728.0" layoutY="10.0" mnemonicParsing="false" onAction="#exportAllClick" text="Export" />
-      <DatePicker fx:id="inputDate" layoutX="414.0" layoutY="10.0" />
+      <DatePicker fx:id="inputDate" layoutX="285.0" layoutY="10.0" prefHeight="26.0" prefWidth="187.0" promptText="Click this and select date -&gt;" />
+      <TextField fx:id="taskDesc" layoutX="480.0" layoutY="10.0" prefHeight="26.0" prefWidth="238.0" promptText="Write the task description" />
     </AnchorPane>
-    <AnchorPane prefHeight="435.0" prefWidth="792.0">
-        <ListView fx:id="toDosList" layoutY="40.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#toDoListSelectClick" prefHeight="360.0" prefWidth="792.0" />
-        <Button layoutX="14.0" layoutY="8.0" mnemonicParsing="false" onAction="#removeTodoClick" text="Remove" />
-    </AnchorPane>
+   <TableView fx:id="listTable" prefHeight="365.0" prefWidth="794.0">
+      <columns>
+         <TableColumn fx:id="statusList" prefWidth="50.39999388456344" text="Status" />
+         <TableColumn fx:id="taskList" prefWidth="197.60000610351562" text="Task" />
+         <TableColumn fx:id="dateList" prefWidth="146.4000244140625" text="Due Date" />
+         <TableColumn fx:id="descList" prefWidth="400.00006103515625" text="Description" />
+      </columns>
+   </TableView>
 </SplitPane>

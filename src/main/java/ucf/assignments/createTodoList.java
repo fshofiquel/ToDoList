@@ -1,8 +1,49 @@
 package ucf.assignments;
 
+import java.time.LocalDate;
+
 public class createTodoList
 {
-	// This class will be meant to help prevent clutting of the driver class by creating/deleting every new todolist
-	// as well as creating/editing/deleting the lists in them
-	// Utilization will be using ArrayLists and properly removing them.
+	public String name;
+	public LocalDate date;
+	public String desc;
+
+
+	public createTodoList(String name, LocalDate date, String desc)
+	{
+		this.name = name;
+		this.date = date;
+		this.desc = desc;
+	}
+
+	public void setName(String name)
+	{
+		this.name = name;
+	}
+
+	public void setDate(LocalDate date)
+	{
+		this.date = date;
+	}
+
+	public void setDesc(String desc)
+	{
+		this.desc = desc;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public LocalDate getDate()
+	{
+		return date;
+	}
+
+	public String getDesc()
+	{
+		return desc;
+	}
+
 }

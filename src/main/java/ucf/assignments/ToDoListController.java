@@ -5,45 +5,59 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
 public class ToDoListController
 {
 	@FXML
-	public TextArea listDesc;
-	public DatePicker inputDate;
+	private DatePicker inputDate;
 	@FXML
-	private ListView<String> toDosList;
+	private TextField taskDesc;
 	@FXML
 	private TextField toDoListName;
 
-	ObservableList<String> bufferString = FXCollections.observableArrayList();
-	private int index = -1;
+	@FXML
+	private TableView<createTodoList> listTable;
+	@FXML
+	private TableColumn statusList;
+	@FXML
+	private TableColumn<createTodoList, String> taskList;
+	@FXML
+	private TableColumn<createTodoList, String> dateList;
+	@FXML
+	private TableColumn<createTodoList, String> descList;
+
+	ObservableList<createTodoList> bufferList = FXCollections.observableArrayList();
+	//private int index = -1;
 
 	@FXML
 	public void addToDoClick(ActionEvent actionEvent)
 	{
+		String buffer;
 		// This will obtain the text found in the textfield from toDoListName and tranfer it to toDoList
 		// The list will be updated to match that change
 
 		// Check if the string in toDoListName is empty or not. If empty, skip it.
 		// Otherwise add content of toDoListName to the buffer and appply that to toDoList
+
 		if (!(toDoListName.getText().trim().isEmpty()) &&
-				inputDate.getConverter().fromString(inputDate.getEditor().getText()) != null)
+				inputDate.getConverter().fromString(inputDate.getEditor().getText()) != null &&
+				!(taskDesc.getText().trim().isEmpty()))
 		{
-			bufferString.add(toDoListName.getText()+" "
-					+String.valueOf(inputDate.getConverter().fromString(inputDate.getEditor().getText())));
 
-			// Clears the textfield and datepicker.
-			toDoListName.clear();
-			inputDate.getEditor().clear();
+			bufferList.add(new createTodoList(toDoListName.getText(),
+					inputDate.getConverter().fromString(inputDate.getEditor().getText()),
+					taskDesc.getText()));
 
-			// Applies the content to the bufferString to toDoList
-			toDosList.setItems(bufferString);
+			taskList.setCellValueFactory(new PropertyValueFactory<createTodoList, String>("name"));
+			dateList.setCellValueFactory(new PropertyValueFactory<createTodoList, String>("date"));
+			descList.setCellValueFactory(new PropertyValueFactory<createTodoList, String>("desc"));
+			listTable.setItems(bufferList);
 		}
 	}
 
-	@FXML
+	/*@FXML
 	public void toDoListSelectClick(MouseEvent mouseEvent)
 	{
 		// Update the index value of the current index of the listview
@@ -59,7 +73,7 @@ public class ToDoListController
 			toDosList.getItems().remove(index);
 		}
 
-	}
+	}*/
 
 
 	@FXML
