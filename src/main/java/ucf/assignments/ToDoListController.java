@@ -20,7 +20,7 @@ public class ToDoListController
 	@FXML
 	private TableView<createTodoList> listTable;
 	@FXML
-	private TableColumn statusList;
+	private TableColumn<createTodoList, CheckBox> statusList;
 	@FXML
 	private TableColumn<createTodoList, String> taskList;
 	@FXML
@@ -29,12 +29,11 @@ public class ToDoListController
 	private TableColumn<createTodoList, String> descList;
 
 	ObservableList<createTodoList> bufferList = FXCollections.observableArrayList();
-	//private int index = -1;
+	private int index = -1;
 
 	@FXML
 	public void addToDoClick(ActionEvent actionEvent)
 	{
-		String buffer;
 		// This will obtain the text found in the textfield from toDoListName and tranfer it to toDoList
 		// The list will be updated to match that change
 
@@ -44,23 +43,32 @@ public class ToDoListController
 				inputDate.getConverter().fromString(inputDate.getEditor().getText()) != null &&
 				!(taskDesc.getText().trim().isEmpty()))
 		{
-
-			bufferList.add(new createTodoList(toDoListName.getText(),
+			CheckBox ch = new CheckBox();
+			bufferList.add(new createTodoList(ch, toDoListName.getText(),
 					inputDate.getConverter().fromString(inputDate.getEditor().getText()),
 					taskDesc.getText()));
 
-			taskList.setCellValueFactory(new PropertyValueFactory<createTodoList, String>("name"));
-			dateList.setCellValueFactory(new PropertyValueFactory<createTodoList, String>("date"));
-			descList.setCellValueFactory(new PropertyValueFactory<createTodoList, String>("desc"));
+			// Created function to remove clutting of addToDoClick
+			setTheCells();
 			listTable.setItems(bufferList);
 		}
 	}
 
-	/*@FXML
+	@FXML
+	public void setTheCells()
+	{
+		statusList.setCellValueFactory(new PropertyValueFactory<createTodoList, CheckBox>("box"));
+		taskList.setCellValueFactory(new PropertyValueFactory<createTodoList, String>("name"));
+		dateList.setCellValueFactory(new PropertyValueFactory<createTodoList, String>("date"));
+		descList.setCellValueFactory(new PropertyValueFactory<createTodoList, String>("desc"));
+	}
+
+
+	@FXML
 	public void toDoListSelectClick(MouseEvent mouseEvent)
 	{
 		// Update the index value of the current index of the listview
-		index = toDosList.getSelectionModel().getSelectedIndex();
+		index = listTable.getSelectionModel().getSelectedIndex();
 	}
 
 	@FXML
@@ -69,10 +77,10 @@ public class ToDoListController
 		// remove the selected toDolist
 		if (index != -1)
 		{
-			toDosList.getItems().remove(index);
+			listTable.getItems().remove(index);
 		}
 
-	}*/
+	}
 
 
 	@FXML

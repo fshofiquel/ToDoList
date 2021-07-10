@@ -16,12 +16,15 @@
       <DatePicker fx:id="inputDate" layoutX="285.0" layoutY="10.0" prefHeight="26.0" prefWidth="187.0" promptText="Click this and select date -&gt;" />
       <TextField fx:id="taskDesc" layoutX="480.0" layoutY="10.0" prefHeight="26.0" prefWidth="238.0" promptText="Write the task description" />
     </AnchorPane>
-   <TableView fx:id="listTable" prefHeight="365.0" prefWidth="794.0">
-      <columns>
-         <TableColumn fx:id="statusList" prefWidth="50.39999388456344" text="Status" />
-         <TableColumn fx:id="taskList" prefWidth="197.60000610351562" text="Task" />
-         <TableColumn fx:id="dateList" prefWidth="146.4000244140625" text="Due Date" />
-         <TableColumn fx:id="descList" prefWidth="400.00006103515625" text="Description" />
-      </columns>
-   </TableView>
+    <AnchorPane prefHeight="200.0" prefWidth="200.0">
+        <TableView fx:id="listTable" layoutY="-2.0" onMouseClicked="#toDoListSelectClick" prefHeight="366.0" prefWidth="794.0">
+           <columns>
+               <TableColumn fx:id="statusList" prefWidth="50.39999388456344" text="Status" />
+               <TableColumn fx:id="taskList" prefWidth="197.60000610351562" text="Task" />
+               <TableColumn fx:id="dateList" prefWidth="146.4000244140625" text="Due Date" />
+               <TableColumn fx:id="descList" prefWidth="400.00006103515625" text="Description" />
+           </columns>
+        </TableView>
+        <Button layoutX="14.0" layoutY="370.0" mnemonicParsing="false" onAction="#removeTodoClick" text="Remove Task" />
+    </AnchorPane>
 </SplitPane>
