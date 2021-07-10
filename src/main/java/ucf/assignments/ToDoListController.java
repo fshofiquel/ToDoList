@@ -40,7 +40,6 @@ public class ToDoListController
 
 		// Check if the string in toDoListName is empty or not. If empty, skip it.
 		// Otherwise add content of toDoListName to the buffer and appply that to toDoList
-
 		if (!(toDoListName.getText().trim().isEmpty()) &&
 				inputDate.getConverter().fromString(inputDate.getEditor().getText()) != null &&
 				!(taskDesc.getText().trim().isEmpty()))

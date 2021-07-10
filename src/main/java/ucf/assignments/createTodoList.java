@@ -4,9 +4,9 @@ import java.time.LocalDate;
 
 public class createTodoList
 {
-	public String name;
-	public LocalDate date;
-	public String desc;
+	private String name;
+	private LocalDate date;
+	private String desc;
 
 
 	public createTodoList(String name, LocalDate date, String desc)
