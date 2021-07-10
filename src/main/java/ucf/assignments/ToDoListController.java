@@ -34,8 +34,11 @@ public class ToDoListController
 			bufferString.add(toDoListName.getText()+" "
 					+String.valueOf(inputDate.getConverter().fromString(inputDate.getEditor().getText())));
 
-			// Clears the textfield with an empty string.
-			toDoListName.setText("");
+			// Clears the textfield and datepicker.
+			toDoListName.clear();
+			inputDate.getEditor().clear();
+
+			// Applies the content to the bufferString to toDoList
 			toDosList.setItems(bufferString);
 		}
 	}
@@ -58,33 +61,10 @@ public class ToDoListController
 
 	}
 
-	@FXML
-	public void addClick(ActionEvent actionEvent)
-	{
-		if (listDesc.getText().length() <= 256)
-		{
-
-		}
-
-		else
-		{
-
-		}
-	}
-
 
 	@FXML
 	public void exportAllClick(ActionEvent actionEvent)
 	{
 		// This will export ALL todoLists into a txt file or a csv. (not sure which one to do just yet)
-	}
-
-
-
-	@FXML
-	public void viewClick(ActionEvent actionEvent)
-	{
-		// changes between lists (this might become obselete if I figure out how to change to different lists just by
-		// clicking the individual todos
 	}
 }
