@@ -70,7 +70,7 @@ public class ToDoListController
 		toDoListName.clear();
 	}
 
-	// Sets the cell value factory and enables editing of the date and desc cells of the tasks.
+	// Sets the cell value factory and enables editing of status, date and desc cells of the tasks.
 	// Moved here because it was getting cluttered.
 	@FXML
 	public void setTheCells()
@@ -140,12 +140,14 @@ public class ToDoListController
 		listTable.getItems().clear();
 	}
 
+	// This will export ALL todoLists into a file format, most likely a csv.
 	@FXML
 	public void exportAllClick(ActionEvent actionEvent)
 	{
-		// This will export ALL todoLists into a txt file or a csv. (not sure which one to do just yet)
+
 	}
 
+	// Filters out the list to only display tasks that are completed.
 	@FXML
 	public void filterCompletedClick(ActionEvent actionEvent)
 	{
@@ -153,6 +155,8 @@ public class ToDoListController
 		filteredList.setPredicate(containsCompleted);
 		listTable.setItems(filteredList);
 	}
+
+	// Filters out the list to only display tasks that are incompleted.
 	public void filterIncompletedClick(ActionEvent actionEvent)
 	{
 		Predicate<createTodoList> containsinCompleted = i -> i.getStatus().contains("x");
@@ -160,6 +164,7 @@ public class ToDoListController
 		listTable.setItems(filteredList);
 	}
 
+	// Sets back to default
 	public void filterDefaultClick(ActionEvent actionEvent)
 	{
 		filteredList.setPredicate(null);
