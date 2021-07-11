@@ -42,8 +42,6 @@ public class ToDoListController
 
 	ObservableList<createTodoList> bufferList = FXCollections.observableArrayList();
 	FilteredList<createTodoList> filteredList = new FilteredList<>(bufferList);
-	ObservableList<createTodoList> completedList = FXCollections.observableArrayList();
-	ObservableList<createTodoList> incompletedList = FXCollections.observableArrayList();
 	private int index = -1;
 
 	@FXML
@@ -81,11 +79,29 @@ public class ToDoListController
 
 		statusList.setCellValueFactory(new PropertyValueFactory<>("status"));
 		statusList.setCellFactory(TextFieldTableCell.forTableColumn());
+		statusList.setOnEditCommit(event ->
+		{
+			createTodoList list = event.getRowValue();
+			list.setStatus(event.getNewValue());
+		});
+
 		taskList.setCellValueFactory(new PropertyValueFactory<>("name"));
+
 		dateList.setCellValueFactory(new PropertyValueFactory<>("date"));
 		dateList.setCellFactory(TextFieldTableCell.forTableColumn());
+		dateList.setOnEditCommit(event ->
+		{
+			createTodoList list = event.getRowValue();
+			list.setStatus(event.getNewValue());
+		});
+
 		descList.setCellValueFactory(new PropertyValueFactory<>("desc"));
 		descList.setCellFactory(TextFieldTableCell.forTableColumn());
+		descList.setOnEditCommit(event ->
+		{
+			createTodoList list = event.getRowValue();
+			list.setStatus(event.getNewValue());
+		});
 	}
 
 	// Everytime the required data is added they are applied to the bufferList.
@@ -133,12 +149,14 @@ public class ToDoListController
 	@FXML
 	public void filterCompletedClick(ActionEvent actionEvent)
 	{
-		Predicate<createTodoList> containsCompleted = i -> i.getStatus().contains("o") || i.getStatus().contains("O");
+		Predicate<createTodoList> containsCompleted = i -> i.getStatus().contains("o");
+		filteredList.setPredicate(containsCompleted);
 		listTable.setItems(filteredList);
 	}
 	public void filterIncompletedClick(ActionEvent actionEvent)
 	{
-		Predicate<createTodoList> containsCompleted = i -> i.getStatus().contains("x") || i.getStatus().contains("X");
+		Predicate<createTodoList> containsinCompleted = i -> i.getStatus().contains("x");
+		filteredList.setPredicate(containsinCompleted);
 		listTable.setItems(filteredList);
 	}
 
