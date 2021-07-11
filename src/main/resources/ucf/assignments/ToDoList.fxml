@@ -26,5 +26,6 @@
            </columns>
         </TableView>
         <Button layoutX="14.0" layoutY="370.0" mnemonicParsing="false" onAction="#removeTodoClick" text="Remove Task" />
+      <Button layoutX="729.0" layoutY="370.0" mnemonicParsing="false" onAction="#removalAllClick" text="Clear All" />
     </AnchorPane>
 </SplitPane>

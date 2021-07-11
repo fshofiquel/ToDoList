@@ -1,3 +1,7 @@
+/*
+ *  UCF COP3330 Summer 2021 Assignment 4 Solution
+ *  Copyright 2021 Fazlur Shofiquel
+ */
 package ucf.assignments;
 
 import javafx.scene.control.CheckBox;
@@ -8,10 +12,10 @@ public class createTodoList
 {
 	private CheckBox box;
 	private String name;
-	private LocalDate date;
+	private String date;
 	private String desc;
 
-	public createTodoList(CheckBox box, String name, LocalDate date, String desc)
+	public createTodoList(CheckBox box, String name, String date, String desc)
 	{
 		this.box = box;
 		this.name = name;
@@ -29,7 +33,7 @@ public class createTodoList
 		this.name = name;
 	}
 
-	public void setDate(LocalDate date)
+	public void setDate(String date)
 	{
 		this.date = date;
 	}
@@ -49,7 +53,7 @@ public class createTodoList
 		return name;
 	}
 
-	public LocalDate getDate()
+	public String getDate()
 	{
 		return date;
 	}

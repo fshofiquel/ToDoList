@@ -1,3 +1,8 @@
+/*
+ *  UCF COP3330 Summer 2021 Assignment 4 Solution
+ *  Copyright 2021 Fazlur Shofiquel
+ */
+
 package ucf.assignments;
 
 import javafx.collections.FXCollections;
@@ -6,10 +11,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
+
+import java.time.format.DateTimeFormatter;
 
 public class ToDoListController
 {
+	// Input variables
 	@FXML
 	private DatePicker inputDate;
 	@FXML
@@ -17,6 +26,7 @@ public class ToDoListController
 	@FXML
 	private TextField toDoListName;
 
+	// Table elements
 	@FXML
 	private TableView<createTodoList> listTable;
 	@FXML
@@ -50,25 +60,34 @@ public class ToDoListController
 			// applies bufferList to listTable
 			listTable.setItems(bufferList);
 		}
+
+		inputDate.getEditor().clear();
+		taskDesc.clear();
+		toDoListName.clear();
 	}
 
 	// Sets the cell value factory. Moved here because it was getting cluttered.
 	@FXML
 	public void setTheCells()
 	{
+		listTable.setEditable(true);
+
 		statusList.setCellValueFactory(new PropertyValueFactory<>("box"));
 		taskList.setCellValueFactory(new PropertyValueFactory<>("name"));
 		dateList.setCellValueFactory(new PropertyValueFactory<>("date"));
+		dateList.setCellFactory(TextFieldTableCell.forTableColumn());
 		descList.setCellValueFactory(new PropertyValueFactory<>("desc"));
+		descList.setCellFactory(TextFieldTableCell.forTableColumn());
 	}
 
 	// Everytime the required data is added they are applied to the bufferList.
 	@FXML
 	public void populateBuffer()
 	{
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 		CheckBox ch = new CheckBox();
 		bufferList.add(new createTodoList(ch, toDoListName.getText(),
-				inputDate.getConverter().fromString(inputDate.getEditor().getText()),
+				inputDate.getValue().format(formatter),
 				taskDesc.getText()));
 	}
 
@@ -88,6 +107,13 @@ public class ToDoListController
 			listTable.getItems().remove(index);
 		}
 
+	}
+
+	// Remove entire list
+	@FXML
+	public void removalAllClick(ActionEvent actionEvent)
+	{
+		listTable.getItems().clear();
 	}
 
 	@FXML
