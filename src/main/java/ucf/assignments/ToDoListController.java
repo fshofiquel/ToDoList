@@ -61,12 +61,14 @@ public class ToDoListController
 			listTable.setItems(bufferList);
 		}
 
+		// Clears all three inputs.
 		inputDate.getEditor().clear();
 		taskDesc.clear();
 		toDoListName.clear();
 	}
 
-	// Sets the cell value factory. Moved here because it was getting cluttered.
+	// Sets the cell value factory and enables editing of the date and desc cells of the tasks.
+	// Moved here because it was getting cluttered.
 	@FXML
 	public void setTheCells()
 	{
