@@ -4,28 +4,29 @@
  */
 package ucf.assignments;
 
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.CheckBox;
 
 import java.time.LocalDate;
 
 public class createTodoList
 {
-	private CheckBox box;
+	private String status;
 	private String name;
 	private String date;
 	private String desc;
 
-	public createTodoList(CheckBox box, String name, String date, String desc)
+	public createTodoList(String status, String name, String date, String desc)
 	{
-		this.box = box;
+		this.status = status;
 		this.name = name;
 		this.date = date;
 		this.desc = desc;
 	}
 
-	public void setBox(CheckBox box)
+	public void setStatus(String status)
 	{
-		this.box = box;
+		this.status = status;
 	}
 
 	public void setName(String name)
@@ -43,9 +44,9 @@ public class createTodoList
 		this.desc = desc;
 	}
 
-	public CheckBox getBox()
+	public String getStatus()
 	{
-		return box;
+		return status;
 	}
 
 	public String getName()
@@ -62,6 +63,4 @@ public class createTodoList
 	{
 		return desc;
 	}
-
-
 }

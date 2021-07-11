@@ -7,6 +7,7 @@ package ucf.assignments;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 
 import java.time.format.DateTimeFormatter;
+import java.util.function.Predicate;
 
 public class ToDoListController
 {
@@ -30,7 +32,7 @@ public class ToDoListController
 	@FXML
 	private TableView<createTodoList> listTable;
 	@FXML
-	private TableColumn<createTodoList, CheckBox> statusList;
+	private TableColumn<createTodoList, String> statusList;
 	@FXML
 	private TableColumn<createTodoList, String> taskList;
 	@FXML
@@ -39,6 +41,9 @@ public class ToDoListController
 	private TableColumn<createTodoList, String> descList;
 
 	ObservableList<createTodoList> bufferList = FXCollections.observableArrayList();
+	FilteredList<createTodoList> filteredList = new FilteredList<>(bufferList);
+	ObservableList<createTodoList> completedList = FXCollections.observableArrayList();
+	ObservableList<createTodoList> incompletedList = FXCollections.observableArrayList();
 	private int index = -1;
 
 	@FXML
@@ -74,7 +79,8 @@ public class ToDoListController
 	{
 		listTable.setEditable(true);
 
-		statusList.setCellValueFactory(new PropertyValueFactory<>("box"));
+		statusList.setCellValueFactory(new PropertyValueFactory<>("status"));
+		statusList.setCellFactory(TextFieldTableCell.forTableColumn());
 		taskList.setCellValueFactory(new PropertyValueFactory<>("name"));
 		dateList.setCellValueFactory(new PropertyValueFactory<>("date"));
 		dateList.setCellFactory(TextFieldTableCell.forTableColumn());
@@ -87,8 +93,8 @@ public class ToDoListController
 	public void populateBuffer()
 	{
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-		CheckBox ch = new CheckBox();
-		bufferList.add(new createTodoList(ch, toDoListName.getText(),
+
+		bufferList.add(new createTodoList("x", toDoListName.getText(),
 				inputDate.getValue().format(formatter),
 				taskDesc.getText()));
 	}
@@ -122,5 +128,23 @@ public class ToDoListController
 	public void exportAllClick(ActionEvent actionEvent)
 	{
 		// This will export ALL todoLists into a txt file or a csv. (not sure which one to do just yet)
+	}
+
+	@FXML
+	public void filterCompletedClick(ActionEvent actionEvent)
+	{
+		Predicate<createTodoList> containsCompleted = i -> i.getStatus().contains("o") || i.getStatus().contains("O");
+		listTable.setItems(filteredList);
+	}
+	public void filterIncompletedClick(ActionEvent actionEvent)
+	{
+		Predicate<createTodoList> containsCompleted = i -> i.getStatus().contains("x") || i.getStatus().contains("X");
+		listTable.setItems(filteredList);
+	}
+
+	public void filterDefaultClick(ActionEvent actionEvent)
+	{
+		filteredList.setPredicate(null);
+		listTable.setItems(bufferList);
 	}
 }
