@@ -9,21 +9,48 @@ class ToDoList
 
 class ToDoListDriver
 {
+    ' Variables
+    - inputDate: DatePicker
+    - taskDesc: TextField
     - toDoListName: TextField
-    - editTasks: TextField
-    - toDoList: ListView
-    - tasksList: ListView
+
+    ' Table elements
+    - listTable: TableView
+    - statusList: TableColumn
+    - taskList: TableColumn
+    - dateList: TableColumn
+    - descList: TableColumn
 
 
     + addToDoClick()
-    + importClick()
-    + exportClick()
-    + addOrEditClick()
-    + viewClick()
+    + setTheCells()
+    + populateBuffer()
+    + toDoListSelectClick()
+    + removeALLClick()
+    + exportAllClick()
+    + filterCompletedClick()
+    + filterIncompletedClick()
+    + filterDefaultClick()
 }
 
 class createToDoList
 {
+    - String status
+    - String name
+    - String date
+    - String desc
+
+    + createToDoList()
+
+    + setstatus()
+    + setName()
+    + setDate()
+    + setDesc()
+
+    + getStatus()
+    + getName()
+    + getDate()
+    + getDesc()
 }
 
 
