@@ -31,7 +31,8 @@
         <Button layoutX="70.0" layoutY="1.0" mnemonicParsing="false" onAction="#filterCompletedClick" text="Completed" />
         <Button layoutX="145.0" layoutY="1.0" mnemonicParsing="false" onAction="#filterIncompletedClick" text="Incompleted" />
         <Button layoutX="228.0" layoutY="1.0" mnemonicParsing="false" onAction="#filterDefaultClick" text="Default" />
-        <Button layoutX="611.0" layoutY="369.0" mnemonicParsing="false" onAction="#exportAllClick" text="Export" />
-      <Button layoutX="729.0" layoutY="369.0" mnemonicParsing="false" onAction="#importClick" text="Import" />
+        <Button layoutX="730.0" layoutY="370.0" mnemonicParsing="false" onAction="#exportAllClick" text="Export" />
+      <Button layoutX="668.0" layoutY="370.0" mnemonicParsing="false" onAction="#importClick" text="Import" />
+      <TextField fx:id="filePathField" layoutX="509.0" layoutY="370.0" promptText="Type file path here:" />
     </AnchorPane>
 </SplitPane>

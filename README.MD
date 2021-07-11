@@ -1,5 +1,6 @@
 Instructions:
 Input the Title, Date and Description of your task, then click the Add Item button.
+(NOTE: If you do not provide any or one of the fields then the task will not be applied)
 
 The task will then appear in the table with its status set to "x" with denotes as incomplete.
 

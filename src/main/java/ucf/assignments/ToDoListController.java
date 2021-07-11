@@ -15,6 +15,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseEvent;
 
+import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.util.function.Predicate;
 
@@ -27,6 +28,8 @@ public class ToDoListController
 	private TextField taskDesc;
 	@FXML
 	private TextField toDoListName;
+	@FXML
+	private TextField filePathField;
 
 	// Table elements
 	@FXML
@@ -40,8 +43,11 @@ public class ToDoListController
 	@FXML
 	private TableColumn<createTodoList, String> descList;
 
+	// Used as buffer to store strings obtained from the textfields and store them into TableView
 	ObservableList<createTodoList> bufferList = FXCollections.observableArrayList();
+	// Used to filter by complete and incomplete tasks
 	FilteredList<createTodoList> filteredList = new FilteredList<>(bufferList);
+	//Global variable used for the index of the tasks in table list and removing them.
 	private int index = -1;
 
 	@FXML
@@ -56,8 +62,9 @@ public class ToDoListController
 				inputDate.getConverter().fromString(inputDate.getEditor().getText()) != null &&
 				!(taskDesc.getText().trim().isEmpty()))
 		{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			// Fill Buffer List
-			populateBuffer();
+			populateBuffer(toDoListName.getText(), inputDate.getValue().format(formatter), taskDesc.getText());
 			// Created function to remove clutting of addToDoClick
 			setTheCells();
 			// applies bufferList to listTable
@@ -106,13 +113,12 @@ public class ToDoListController
 
 	// Everytime the required data is added they are applied to the bufferList.
 	@FXML
-	public void populateBuffer()
+	public void populateBuffer(String name, String date, String desc)
 	{
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-		bufferList.add(new createTodoList("x", toDoListName.getText(),
-				inputDate.getValue().format(formatter),
-				taskDesc.getText()));
+		bufferList.add(new createTodoList("x",
+				name,
+				date,
+				desc));
 	}
 
 	// Update the index value of the current index of the listview
@@ -142,8 +148,64 @@ public class ToDoListController
 
 	// This will export ALL todoLists into a file format, most likely a csv.
 	@FXML
-	public void exportAllClick(ActionEvent actionEvent)
+	public void exportAllClick(ActionEvent actionEvent) throws IOException
 	{
+		Writer writer = null;
+
+		try
+		{
+			File file = new File("list.csv");
+			writer = new BufferedWriter(new FileWriter(file));
+			for (createTodoList list : bufferList)
+			{
+				String text = list.getStatus() + "," + list.getName() + "," + list.getDate() + "," + list.getDesc() + "\n";
+
+				writer.write(text);
+			}
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			assert writer != null;
+			writer.flush();
+			writer.close();
+		}
+
+	}
+
+	public void importClick(ActionEvent actionEvent) throws IOException
+	{
+		String filePath;
+		BufferedReader reader = null;
+		String FieldDelimiter = ",";
+
+		try
+		{
+			filePath = filePathField.getText();
+			File file = new File(filePath);
+			reader = new BufferedReader(new FileReader(file));
+			String text;
+			while ((text = reader.readLine()) != null)
+			{
+				String[] fields = text.split(FieldDelimiter, -1);
+				String name = fields[0];
+				String date = fields[1];
+				String desc = fields[3];
+
+				populateBuffer(name, date, desc);
+				setTheCells();
+				listTable.setItems(bufferList);
+			}
+
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		} finally
+		{
+			assert reader != null;
+			reader.close();
+		}
 
 	}
 
@@ -170,4 +232,6 @@ public class ToDoListController
 		filteredList.setPredicate(null);
 		listTable.setItems(bufferList);
 	}
+
+
 }
