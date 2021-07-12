@@ -64,7 +64,7 @@ public class ToDoListController
 		{
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 			// Fill Buffer List
-			populateBuffer(toDoListName.getText(), inputDate.getValue().format(formatter), taskDesc.getText());
+			populateBuffer("x", toDoListName.getText(), inputDate.getValue().format(formatter), taskDesc.getText());
 			// Created function to remove clutting of addToDoClick
 			setTheCells();
 			// applies bufferList to listTable
@@ -113,9 +113,9 @@ public class ToDoListController
 
 	// Everytime the required data is added they are applied to the bufferList.
 	@FXML
-	public void populateBuffer(String name, String date, String desc)
+	public void populateBuffer(String status, String name, String date, String desc)
 	{
-		bufferList.add(new createTodoList("x",
+		bufferList.add(new createTodoList(status,
 				name,
 				date,
 				desc));
@@ -186,14 +186,17 @@ public class ToDoListController
 			File file = new File(filePath);
 			reader = new BufferedReader(new FileReader(file));
 			String text;
+
 			while ((text = reader.readLine()) != null)
 			{
 				String[] fields = text.split(FieldDelimiter, -1);
-				String name = fields[0];
-				String date = fields[1];
+				String status = fields[0];
+				String name = fields[1];
+				String date = fields[2];
 				String desc = fields[3];
 
-				populateBuffer(name, date, desc);
+
+				populateBuffer(status, name, date, desc);
 				setTheCells();
 				listTable.setItems(bufferList);
 			}
