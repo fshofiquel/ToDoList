@@ -15,3 +15,9 @@ then requested tasks.
 To remove a task select the desired task and then click the the Remove Task button.
 
 To clear the entire task list, simply clikc the Clear All button.
+
+To use export, simply click the Export button. This will take a few seconds to process and will then create a .csv file
+in the same directory the program is located (within intellij it will create it in the main directory of the repo)
+
+To type the full file path in the text field located next to the Import button and then click it. It will import it 
+to the TableView

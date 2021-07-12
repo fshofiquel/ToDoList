@@ -235,6 +235,4 @@ public class ToDoListController
 		filteredList.setPredicate(null);
 		listTable.setItems(bufferList);
 	}
-
-
 }

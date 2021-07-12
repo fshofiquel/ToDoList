@@ -21,6 +21,10 @@ class ToDoListDriver
     - dateList: TableColumn
     - descList: TableColumn
 
+    bufferList: ObservableList
+    filtertedList: FilteredList
+    -int index
+
 
     + addToDoClick()
     + setTheCells()
@@ -28,6 +32,7 @@ class ToDoListDriver
     + toDoListSelectClick()
     + removeALLClick()
     + exportAllClick()
+    + importClick()
     + filterCompletedClick()
     + filterIncompletedClick()
     + filterDefaultClick()
@@ -57,7 +62,6 @@ class createToDoList
 javafx.Application <|-- ToDoList
 
 ToDoList -- ToDoListDriver
-ToDoListDriver -- createToDoList
 
 
 
