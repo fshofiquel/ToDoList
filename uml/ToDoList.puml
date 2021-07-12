@@ -61,7 +61,8 @@ class createToDoList
 
 javafx.Application <|-- ToDoList
 
-ToDoList -- ToDoListDriver
+ToDoList - ToDoListDriver
+ToDoListDriver - createToDoList
 
 
 

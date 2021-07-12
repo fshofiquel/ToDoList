@@ -69,6 +69,7 @@ public class ToDoListController
 			setTheCells();
 			// applies bufferList to listTable
 			listTable.setItems(bufferList);
+
 		}
 
 		// Clears all three inputs.
@@ -136,7 +137,6 @@ public class ToDoListController
 		{
 			listTable.getItems().remove(index);
 		}
-
 	}
 
 	// Remove entire list

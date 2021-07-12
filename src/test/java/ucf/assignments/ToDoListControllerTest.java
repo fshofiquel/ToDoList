@@ -1,49 +1,24 @@
 package ucf.assignments;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ToDoListControllerTest
 {
-
 	@Test
-	void addToDoClick()
+	void populateBuffer()
 	{
-		// Send text obtained from toDoName to toDoList
-		// Assert that they match with each other and the testcase
+		// Create overservable list and populate
+		ObservableList<createTodoList> bufferList = FXCollections.observableArrayList();
+		bufferList.add(new createTodoList("x", "Faz", "1996-05-19", "This is a desc"));
+
+		// Assert the values are correctly populated into buffer list
+		assertEquals("x", bufferList.get(0).getStatus());
+		assertEquals("Faz", bufferList.get(0).getName());
+		assertEquals("1996-05-19", bufferList.get(0).getDate());
+		assertEquals("This is a desc", bufferList.get(0).getDesc());
 	}
-
-	@Test
-	void exportAllClick()
-	{
-		// Confirm that an external file is created and both files match each other
-	}
-
-	@Test
-	void exportListClick()
-	{
-		// Confirm that an external file for a single list is created and both files match each other
-	}
-
-	@Test
-	void removeTodoClick()
-	{
-		// Removes ToDo list
-		// Confirms that there is nothing rememaing (both the list and the todo must be gone)
-	}
-
-	@Test
-	void addOrEditClick()
-	{
-		// Confirm the changes made to a list
-	}
-
-	@Test
-	void viewClick()
-	{
-		// Confirm that a new Todo list is being viewed.
-	}
-
-
 }
